@@ -1,0 +1,8 @@
+  <table>
+    <tr th:each="item:${get_inventory}">
+      <form th:object="${dropItem}" th:action="@{__${T(com.tkjavadev.adventuregame.util.GameMappings).DROP}__}" method="post">
+        <input type="hidden" th:value="${item}" th:id="name" th:name="name" />
+        <button class="btn-item" type="submit" id="dropButton" th:text="${item}" title="${item}">COINS</button>
+      </form>
+    </tr>
+  </table>

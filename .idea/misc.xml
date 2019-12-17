@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ProjectResources">
+    <resource url="//hello.myfonts.net/count/392987" location="$PROJECT_DIR$/src/assets/css/MyWebFont.css" />
+  </component>
   <component name="ProjectRootManager">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
