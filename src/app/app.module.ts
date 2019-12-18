@@ -2,12 +2,24 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { InventoryComponent } from './inventory/inventory.component';
-import { LocationComponent } from './location/location.component';
-import { ItemsComponent } from './items/items.component';
-import { DirectionsComponent } from './directions/directions.component';
-import { GateAlertComponent } from './gate-alert/gate-alert.component';
-import { ItemAlertComponent } from './item-alert/item-alert.component';
+import { InventoryComponent } from './play/inventory/inventory.component';
+import { LocationComponent } from './play/location/location.component';
+import { ItemsComponent } from './play/items/items.component';
+import { DirectionsComponent } from './play/directions/directions.component';
+import { GateAlertComponent } from './play/gate-alert/gate-alert.component';
+import { ItemAlertComponent } from './play/item-alert/item-alert.component';
+import { FormsModule } from "@angular/forms";
+import {RouterModule, Routes} from "@angular/router";
+import { HomeComponent } from './home/home.component';
+import { PlayComponent } from './play/play.component';
+import { GameOverComponent } from './game-over/game-over.component';
+
+const appRoutes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'play', component: PlayComponent },
+  { path: 'game-over', component: GameOverComponent }
+];
 
 @NgModule({
   declarations: [
@@ -17,10 +29,15 @@ import { ItemAlertComponent } from './item-alert/item-alert.component';
     ItemsComponent,
     DirectionsComponent,
     GateAlertComponent,
-    ItemAlertComponent
+    ItemAlertComponent,
+    HomeComponent,
+    PlayComponent,
+    GameOverComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
