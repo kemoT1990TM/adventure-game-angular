@@ -13,6 +13,9 @@ import {RouterModule, Routes} from "@angular/router";
 import { HomeComponent } from './home/home.component';
 import { PlayComponent } from './play/play.component';
 import { GameOverComponent } from './game-over/game-over.component';
+import {HttpClientModule} from "@angular/common/http";
+import {LocationService} from "./play/location/location.service";
+import {GateService} from "./play/directions/gate.service";
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -37,9 +40,13 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [
+    LocationService,
+    GateService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

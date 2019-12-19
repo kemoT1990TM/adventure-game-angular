@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Gate } from '../directions/gate';
 
 @Component({
   selector: 'app-gate-alert',

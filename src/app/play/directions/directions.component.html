@@ -1,13 +1,13 @@
     <table>
-      <a class="btn-solid-quit" th:href="@{__${T(com.tkjavadev.adventuregame.util.GameMappings).EXIT}__}">QUIT</a>
-      <tr th:each="gate:${gates}">
-        <form th:object="${nextGate}" th:action="@{__${T(com.tkjavadev.adventuregame.util.GameMappings).CHANGE}__}" method="post">
-          <input type="hidden" th:id="destId" th:name="destId" th:value="${gate.getDestId()}" />
-          <input type="hidden" th:id="id" th:name="id" th:value="${gate.getId()}" />
-          <input type="hidden" th:id="locId" th:name="locId" th:value="${gate.getLocId()}" />
-          <input type="hidden" th:id="direction" th:name="direction" th:value="${gate.getDirection()}" />
-          <input type="hidden" th:id="required" th:name="required" th:value="${gate.getRequired()}" />
-          <button class="btn" type="submit" th:text="${gate.getFullName()}">DIRECTION</button>
-        </form>
+      <a class="btn-solid-quit" href="/game-over">QUIT</a>
+      <tr *ngFor="let gate of gates">
+<!--        <form action="#" method="post">-->
+<!--          <input type="hidden" [(ngModel)]="gate.destId" name="destId"/>-->
+<!--          <input type="hidden" [(ngModel)]="gate.id" name="id"/>-->
+<!--          <input type="hidden" [(ngModel)]="gate.locId" name="locId"/>-->
+<!--          <input type="hidden" [(ngModel)]="gate.direction" name="direction"/>-->
+<!--          <input type="hidden" [(ngModel)]="gate.required" name="required"/>-->
+          <button class="btn" type="submit" (click)="changeLocation(gate)">{{ gate.fullName }}</button>
+<!--        </form>-->
       </tr>
     </table>
