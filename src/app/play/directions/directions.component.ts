@@ -1,8 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Gate} from "./gate";
 import {GateService} from "./gate.service";
 import {LocationService} from "../location/location.service";
 import {LocationComponent} from "../location/location.component";
+import {Gate} from "../location/gate";
 
 @Component({
   selector: 'app-directions',
@@ -12,20 +12,15 @@ import {LocationComponent} from "../location/location.component";
 export class DirectionsComponent implements OnInit {
 
   private gates: Gate[];
-  locationComponent: LocationComponent;
 
-  constructor(private gateService: GateService, private locationService: LocationService) { }
+  constructor(private locationService: LocationService) { }
 
   ngOnInit() {
-    this.gateService.getGates().subscribe(data => {
-      this.gates = data;
-    });
+    this.locationService.getGates().subscribe();
   }
 
   changeLocation(gate: Gate){
-    this.gateService.changeLocation(gate).subscribe(data =>{
-      this.locationService.getLocation();
-      });
+    this.locationService.changeLocation(gate).subscribe();
   }
 
   // @Output() updateView = new EventEmitter();

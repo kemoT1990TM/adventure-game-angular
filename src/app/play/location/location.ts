@@ -1,5 +1,5 @@
-import {Gate} from "../directions/gate";
 import {Item} from "../items/item";
+import {Gate} from "./gate";
 
 export class Location {
   public id: string;
@@ -14,5 +14,9 @@ export class Location {
     this.description = description;
     this.gates = gates;
     this.items = items;
+  }
+
+  public getGates(){
+    return this.gates;
   }
 }

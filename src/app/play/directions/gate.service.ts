@@ -1,6 +1,8 @@
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-import {Gate} from "./gate";
+import {catchError, map} from "rxjs/operators";
+import {throwError} from "rxjs";
+import {Gate} from "../location/gate";
 
 @Injectable()
 export class GateService{
