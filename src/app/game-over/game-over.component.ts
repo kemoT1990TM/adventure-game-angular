@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {PlayService} from "../play/play.service";
 
 @Component({
   selector: 'app-game-over',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameOverComponent implements OnInit {
 
-  constructor() { }
+  constructor(private playService: PlayService) { }
 
   ngOnInit() {
   }
 
+  private restart(){
+    this.playService.restart().subscribe();
+  }
 }

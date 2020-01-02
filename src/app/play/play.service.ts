@@ -11,6 +11,10 @@ export class PlayService {
   private readonly locationUrl: string;
   private readonly gatesUrl: string;
   private readonly itemsUrl: string;
+  private readonly startUrl: string;
+  private readonly restartUrl: string;
+  private readonly inventoryUrl: string;
+
   private _refreshNedded$ = new Subject<void>();
 
   get refreshNedded$(){
@@ -21,6 +25,9 @@ export class PlayService {
     this.locationUrl = "/api/game/location";
     this.gatesUrl = "/api/game/gates";
     this.itemsUrl = "/api/game/items";
+    this.startUrl = "/api/game/start";
+    this.restartUrl = "/api/game/restart";
+    this.inventoryUrl = "/api/game/inventory";
   }
 
   getLocation() {
@@ -41,6 +48,12 @@ export class PlayService {
     }));
   }
 
+  getInventory() {
+    return this.http.get<Item[]>(this.inventoryUrl).pipe(map((data: Item[]) => {
+      return data;
+    }));
+  }
+
   changeLocation(gate: Gate){
     return this.http.post("/api/game/change",gate).pipe(
       tap(()=>{
@@ -49,10 +62,24 @@ export class PlayService {
   }
 
   takeItem(item: Item){
-    console.log(JSON.stringify(item));
     return this.http.post("/api/game/take",item).pipe(
       tap(()=>{
         this._refreshNedded$.next();})
     );
+  }
+
+  dropItem(item: Item){
+    return this.http.post("/api/game/drop",item).pipe(
+      tap(()=>{
+        this._refreshNedded$.next();})
+    );
+  }
+
+  start() {
+    return this.http.get<void>(this.startUrl);
+  }
+
+  restart() {
+    return this.http.get<void>(this.restartUrl);
   }
 }
