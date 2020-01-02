@@ -14,8 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { PlayComponent } from './play/play.component';
 import { GameOverComponent } from './game-over/game-over.component';
 import {HttpClientModule} from "@angular/common/http";
-import {LocationService} from "./play/location/location.service";
-import {GateService} from "./play/directions/gate.service";
+import {PlayService} from "./play/play.service";
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -44,7 +43,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    LocationService
+    PlayService
   ],
   bootstrap: [AppComponent]
 })

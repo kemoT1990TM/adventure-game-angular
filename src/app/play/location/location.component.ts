@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {LocationService} from "./location.service";
-import {Gate} from "./gate";
+import {PlayService} from "../play.service";
 
 @Component({
   selector: 'app-location',
@@ -9,9 +8,21 @@ import {Gate} from "./gate";
 })
 export class LocationComponent implements OnInit {
 
-  constructor(private locationService: LocationService) { }
+  private location: Location;
+
+  constructor(private playService: PlayService) { }
 
   ngOnInit() {
-    this.locationService.getLocation().subscribe();
+    this.playService.refreshNedded$.subscribe(()=> {
+        this.getLocation();
+      });
+    this.getLocation();
+  }
+
+  private getLocation(){
+    this.playService.getLocation().subscribe(
+      (data: Location) => {
+        this.location = data;
+      });
   }
 }

@@ -1,8 +1,6 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {GateService} from "./gate.service";
-import {LocationService} from "../location/location.service";
-import {LocationComponent} from "../location/location.component";
+import {Component, OnInit} from '@angular/core';
 import {Gate} from "../location/gate";
+import {PlayService} from "../play.service";
 
 @Component({
   selector: 'app-directions',
@@ -13,25 +11,23 @@ export class DirectionsComponent implements OnInit {
 
   private gates: Gate[];
 
-  constructor(private locationService: LocationService) { }
+  constructor(private playService: PlayService) {
+  }
 
   ngOnInit() {
-    this.locationService.getGates().subscribe();
+    this.playService.refreshNedded$.subscribe(()=> {
+      this.getGates();
+    });
+    this.getGates();
   }
 
-  changeLocation(gate: Gate){
-    this.locationService.changeLocation(gate).subscribe();
+  private getGates(){
+    this.playService.getGates().subscribe((data: Gate[]) => {
+      this.gates = data;});
   }
 
-  // @Output() updateView = new EventEmitter();
-  //
-  // public create(name, description, archived, selectedParents): void {
-  //   http.post.subscribe(() => {
-  //     this.messageService.success('Worked');
-  //     //here the other component should call the get method and refresh the page afterwards
-  //     this.updateView.emit();
-  //   }, () => {
-  //     this.messageService.error('Error');
-  //   });;
-  // }
+  private changeLocation(gate: Gate){
+    this.playService.changeLocation(gate).subscribe();
+  }
+
 }

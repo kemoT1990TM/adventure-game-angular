@@ -1,13 +1,6 @@
     <table>
       <a class="btn-solid-quit" href="/game-over">QUIT</a>
       <tr *ngFor="let gate of gates">
-<!--        <form action="#" method="post">-->
-<!--          <input type="hidden" [(ngModel)]="gate.destId" name="destId"/>-->
-<!--          <input type="hidden" [(ngModel)]="gate.id" name="id"/>-->
-<!--          <input type="hidden" [(ngModel)]="gate.locId" name="locId"/>-->
-<!--          <input type="hidden" [(ngModel)]="gate.direction" name="direction"/>-->
-<!--          <input type="hidden" [(ngModel)]="gate.required" name="required"/>-->
           <button class="btn" type="submit" (click)="changeLocation(gate)">{{ gate.fullName }}</button>
-<!--        </form>-->
       </tr>
     </table>
