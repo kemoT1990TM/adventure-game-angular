@@ -1,5 +1,6 @@
-  <table>
-    <tr *ngFor="let item of inventory">
-        <button class="btn" type="submit" id="dropButton" (click)="dropItem(item)">{{ item.name }}</button>
+  <table class="center">
+    <tr *ngIf="!inventory.length"><button class="btn-item" type="submit" id="dropButton"></button></tr>
+    <tr *ngFor="let item of inventory" class="inline">
+        <button class="btn-item" type="submit" id="dropButton" (click)="dropItem(item)"><img src="assets/img/icons/{{ item.name }}.png" class="itembutton"/></button>
     </tr>
   </table>

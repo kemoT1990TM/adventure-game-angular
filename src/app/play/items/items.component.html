@@ -1,6 +1,6 @@
-<table class="relative">
-  <tr *ngFor="let item of items">
-<!--      <button class="btn-item" type="submit" (click)="takeItem(item)">{{ item.name }}</button>-->
-    <button class="btn" type="submit" (click)="takeItem(item)">{{ item.name }}</button>
+<table class="relative center">
+  <tr *ngIf="!items.length"><button class="btn-item" type="submit" id="dropButton"></button></tr>
+  <tr *ngFor="let item of items" class="inline">
+    <button class="btn-item" type="submit" (click)="takeItem(item)"><img src="assets/img/icons/{{ item.name }}.png" class="itembutton"/></button>
   </tr>
 </table>

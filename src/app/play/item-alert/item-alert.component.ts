@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {PlayService} from "../play.service";
+import {isNgTemplate} from "@angular/compiler";
 
 @Component({
   selector: 'app-item-alert',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ItemAlertComponent implements OnInit {
 
-  constructor() { }
+  private itemMessage: string[];
+
+  constructor(private playService: PlayService) {
+  }
 
   ngOnInit() {
+    this.playService.refreshNedded$.subscribe(()=> {
+      this.getItemMessage();
+    });
+    this.getItemMessage();
+  }
+
+  private getItemMessage(){
+    this.playService.getItemMessage().subscribe((data: string[]) => {
+      console.log(this.itemMessage);
+      this.itemMessage = data;});
   }
 
 }

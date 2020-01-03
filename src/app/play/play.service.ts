@@ -1,7 +1,7 @@
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-import {catchError, map, tap} from 'rxjs/operators';
-import {BehaviorSubject, Subject, throwError} from "rxjs";
+import {map, tap} from 'rxjs/operators';
+import {Subject} from "rxjs";
 import {Gate} from "./location/gate";
 import {Item} from "./items/item";
 
@@ -16,6 +16,11 @@ export class PlayService {
   private readonly inventoryUrl: string;
   private readonly quitUrl: string;
   private readonly resultsUrl: string;
+  private readonly itemMessageUrl: string;
+  private readonly gateMessageUrl: string;
+  private readonly itemTakeUrl: string;
+  private readonly itemDropUrl: string;
+  private readonly gateChangeUrl: string;
 
   private _refreshNedded$ = new Subject<void>();
 
@@ -32,6 +37,11 @@ export class PlayService {
     this.inventoryUrl = "/api/game/inventory";
     this.quitUrl = "/api/game/exit";
     this.resultsUrl = "/api/game/results";
+    this.itemMessageUrl = "/api/game/item/message";
+    this.gateMessageUrl = "/api/game/gate/message";
+    this.itemTakeUrl = "/api/game/item/take";
+    this.itemDropUrl = "/api/game/item/drop";
+    this.gateChangeUrl = "/api/game/gate/change";
   }
 
   getLocation() {
@@ -64,22 +74,34 @@ export class PlayService {
     }));
   }
 
+  getItemMessage() {
+    return this.http.get<string[]>(this.itemMessageUrl).pipe(map((data: string[]) => {
+      return data;
+    }));
+  }
+
+  getGateMessage() {
+    return this.http.get<string[]>(this.gateMessageUrl).pipe(map((data: string[]) => {
+      return data;
+    }));
+  }
+
   changeLocation(gate: Gate){
-    return this.http.post("/api/game/change",gate).pipe(
+    return this.http.post(this.gateChangeUrl,gate).pipe(
       tap(()=>{
       this._refreshNedded$.next();})
     );
   }
 
   takeItem(item: Item){
-    return this.http.post("/api/game/take",item).pipe(
+    return this.http.post(this.itemTakeUrl,item).pipe(
       tap(()=>{
         this._refreshNedded$.next();})
     );
   }
 
   dropItem(item: Item){
-    return this.http.post("/api/game/drop",item).pipe(
+    return this.http.post(this.itemDropUrl,item).pipe(
       tap(()=>{
         this._refreshNedded$.next();})
     );

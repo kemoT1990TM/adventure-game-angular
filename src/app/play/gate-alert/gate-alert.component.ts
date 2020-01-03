@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Gate} from "../location/gate";
+import {PlayService} from "../play.service";
 
 @Component({
   selector: 'app-gate-alert',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GateAlertComponent implements OnInit {
 
-  constructor() { }
+  private gateMessage: string[];
+
+  constructor(private playService: PlayService) {
+  }
 
   ngOnInit() {
+    this.playService.refreshNedded$.subscribe(()=> {
+      this.getGateMessage();
+    });
+    this.getGateMessage();
   }
+
+  private getGateMessage(){
+    this.playService.getGateMessage().subscribe((data: string[]) => {
+      console.log(this.gateMessage)
+      this.gateMessage = data;});
+  }
+
 
 }
