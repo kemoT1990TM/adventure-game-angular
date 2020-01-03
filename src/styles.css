@@ -248,6 +248,10 @@ body {
   line-height: 0.8;
 }
 
+.directions-table{
+  width: 100%;
+}
+
 /* HEADINGS */
 
 h1,

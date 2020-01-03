@@ -1,6 +1,6 @@
-    <table>
-      <a class="btn-solid-quit" href="/game-over">QUIT</a>
-      <tr *ngFor="let gate of gates">
-          <button class="btn" type="submit" (click)="changeLocation(gate)">{{ gate.fullName }}</button>
-      </tr>
-    </table>
+<table class="directions-table">
+  <a class="btn-solid-quit" href="/game-over" (click)="quit()">QUIT</a>
+  <tr *ngFor="let gate of gates">
+    <button class="btn" type="submit" (click)="changeLocation(gate)">{{ gate.fullName }}</button>
+  </tr>
+</table>

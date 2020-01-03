@@ -30,4 +30,8 @@ export class DirectionsComponent implements OnInit {
     this.playService.changeLocation(gate).subscribe();
   }
 
+  private quit(){
+    this.playService.quit().subscribe();
+  }
+
 }
